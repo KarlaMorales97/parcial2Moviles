@@ -1,5 +1,6 @@
 package com.morales.parcial2moviles;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.morales.parcial2moviles.Games.CSGO;
+import com.morales.parcial2moviles.Games.Dota;
+import com.morales.parcial2moviles.Games.legueLegends;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -83,6 +88,21 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_news) {
             // Handle the camera action
         } else if (id == R.id.nav_games) {
+
+        } else if (id == R.id.nav_legue) {
+
+            Intent intent = new Intent(MainActivity.this, legueLegends.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_dota) {
+
+            Intent intent = new Intent(MainActivity.this, Dota.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_cs) {
+
+            Intent intent = new Intent(MainActivity.this, CSGO.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_settings) {
 
