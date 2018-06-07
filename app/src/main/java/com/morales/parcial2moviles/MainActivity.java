@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,16 +19,23 @@ import android.view.MenuItem;
 import com.morales.parcial2moviles.Games.CSGO;
 import com.morales.parcial2moviles.Games.Dota;
 import com.morales.parcial2moviles.Games.legueLegends;
+import com.morales.parcial2moviles.Login.LoginActivity;
+import com.morales.parcial2moviles.News.Adapter;
+import com.morales.parcial2moviles.News.Book;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    List<Book> bookList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +54,47 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        ////////////////////////
+
+        bookList = new ArrayList<>();
+        bookList.add(new Book("KARLA","BEATRIZ","MORALES",R.drawable.karla));
+        bookList.add(new Book("KARLA","BEATRIZ","MORALES",R.drawable.karla));
+        bookList.add(new Book("KARLA","BEATRIZ","MORALES",R.drawable.karla));
+        bookList.add(new Book("KARLA","BEATRIZ","MORALES",R.drawable.karla));
+        bookList.add(new Book("KARLA","BEATRIZ","MORALES",R.drawable.karla));
+        bookList.add(new Book("KARLA","BEATRIZ","MORALES",R.drawable.karla));
+        bookList.add(new Book("KARLA","BEATRIZ","MORALES",R.drawable.karla));
+        bookList.add(new Book("KARLA","BEATRIZ","MORALES",R.drawable.karla));
+        bookList.add(new Book("KARLA","BEATRIZ","MORALES",R.drawable.karla));
+        bookList.add(new Book("KARLA","BEATRIZ","MORALES",R.drawable.karla));
+        bookList.add(new Book("KARLA","BEATRIZ","MORALES",R.drawable.karla));
+        bookList.add(new Book("KARLA","BEATRIZ","MORALES",R.drawable.karla));
+        bookList.add(new Book("KARLA","BEATRIZ","MORALES",R.drawable.karla));
+        bookList.add(new Book("KARLA","BEATRIZ","MORALES",R.drawable.karla));
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        Adapter myAdapter = new Adapter(this,bookList);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if(position%3 == 0){
+                    return 2;
+                }
+                else{
+                    return 1;
+                }
+            }
+        });
+
+        recyclerView.setAdapter(myAdapter);
+
+
+        ///////////////////////////////
     }
 
     @Override
@@ -79,6 +129,8 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -87,8 +139,6 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_news) {
             // Handle the camera action
-        } else if (id == R.id.nav_games) {
-
         } else if (id == R.id.nav_legue) {
 
             Intent intent = new Intent(MainActivity.this, legueLegends.class);

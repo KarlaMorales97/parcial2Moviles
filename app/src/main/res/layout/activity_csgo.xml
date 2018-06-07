@@ -28,7 +28,8 @@
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
+            android:id="@+id/tabsCSGO"
+            app:tabTextColor="#212121"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -40,12 +41,14 @@
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem2"
+                app:tabTextColor="#212121"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tab_text_2" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem3"
+                app:tabTextColor="#212121"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tab_text_3" />
