@@ -71,7 +71,7 @@ public class NewRopository {
 
         Call<List<New>> data = apiData.getData("Bearded " + token);
 
-        //Hacemos la devolucion de llamada para recibir la lista de noticias
+        //Hacemos la devolucion de llamada para comprobar que la funcion de lamada fue exitosa
         data.enqueue(new Callback<List<New>>() {
 
             //Comprobando si la respuesta de inicio de sesion es correcta o no

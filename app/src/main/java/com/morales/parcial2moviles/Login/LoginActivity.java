@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View v) {
                 if(!edit_text_user.getText().toString().isEmpty() || !edit_text_password.getText().toString().isEmpty()) {
-                    FindToken();
+                    myToken();
                 }
                 else{
                     Toast.makeText(LoginActivity.this,"It's something empty", Toast.LENGTH_SHORT).show();
@@ -142,20 +142,32 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
 
-
-    private void FindToken(){
+    //Creamos la funcion que nos buscara el token en la API
+    private void myToken(){
+        //Creamos nuestro Gson para la deserialización e los datos
         Gson gson = new GsonBuilder().registerTypeAdapter(String.class, new Token_Login()).create();
+        //Obtenemos desde la URL previamente gaurdada en GameNewsAPI
+        //Usando el retrofit nos permite gestionar diferentes parametros de los metodos GET, POST.
+        //parseandolos automaticamente a POJO
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl(GameNewsAPI.URL).addConverterFactory(GsonConverterFactory.create(gson));
+        //Construimos el retrofit
         Retrofit retrofit = builder.build();
+        //Creamos el retrofit con la interfaz GameNewsAPI
         GameNewsAPI gameNewsApi_ = retrofit.create(GameNewsAPI.class);
+        //Ontenemos el usuario y la contrasenia y lo parseamos a string
         login_data usuario = new login_data(edit_text_user.getText().toString(), edit_text_password.getText().toString());
+        //Obtenemos el usuario y la contrasenia de la API
         Call<String> call= gameNewsApi_.login(usuario.getUser(),usuario.getPassword());
+        //Hacemos la devolucion de llamada para comprobar que la funcion de lamada fue exitosa
         call.enqueue(new Callback<String>() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
+            //Si la respuespuesta fue exitosa entonces aniadimos el token en el shared preferences
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if(response.isSuccessful() && !Objects.equals(response.body(), "")){
                     sharedpreferences(response.body());
+                    //LLamamos a la nueva actividad para que se muestren las noticias despues de
+                    //haber corroborado el token
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
