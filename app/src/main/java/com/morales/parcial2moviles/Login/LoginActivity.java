@@ -36,7 +36,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.morales.parcial2moviles.AbstractsClass.API_DATA;
+import com.morales.parcial2moviles.repository.api.GameNewsAPI;
 import com.morales.parcial2moviles.MainActivity;
 import com.morales.parcial2moviles.R;
 
@@ -141,20 +141,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
     }
 
+
+
     private void FindToken(){
         Gson gson = new GsonBuilder().registerTypeAdapter(String.class, new Token_Login()).create();
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl(API_DATA.URL).addConverterFactory(GsonConverterFactory.create(gson));
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl(GameNewsAPI.URL).addConverterFactory(GsonConverterFactory.create(gson));
         Retrofit retrofit = builder.build();
-        API_DATA api_data = retrofit.create(API_DATA.class);
+        GameNewsAPI gameNewsApi_ = retrofit.create(GameNewsAPI.class);
         login_data usuario = new login_data(edit_text_user.getText().toString(), edit_text_password.getText().toString());
-        Call<String> call= api_data.login(usuario.getUser(),usuario.getPassword());
+        Call<String> call= gameNewsApi_.login(usuario.getUser(),usuario.getPassword());
         call.enqueue(new Callback<String>() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if(response.isSuccessful() && !Objects.equals(response.body(), "")){
                     sharedpreferences(response.body());
-                    Toast.makeText(LoginActivity.this,"Token: "+response.body(),Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -168,18 +169,29 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                 if(t instanceof SocketTimeoutException){
-                    Toast.makeText(LoginActivity.this,"Fallo",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"Error",Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
     }
+    //Creamos el shared preferences el cual nos ayudara a recordar y guardar un valor necesario
+    //para la funcionalidad de toda la aplicacion
     private void sharedpreferences(String token){
         SharedPreferences sharedPreferences = this.getSharedPreferences("mToken", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("Token",token);
+        editor.putString("token",token);
         editor.apply();
+
+     //Verificamos si shared preferences esta vacio o no y si no lo esta la primera acctividad sera ActivityMain
+        if(sharedPreferences.contains("mToken")){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
     }
+
+
+
 
     //////////////////////////////
 
