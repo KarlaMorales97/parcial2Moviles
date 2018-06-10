@@ -19,7 +19,7 @@ public class NewDeserializer implements JsonDeserializer<New> {
     public New deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         noticias = new New();
 
-        //Se crea un objeto Json
+        //Se crea un objeto Json para recibir objeto de la API
 
         JsonObject newJsonObject =  json.getAsJsonObject();
 

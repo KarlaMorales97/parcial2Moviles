@@ -17,15 +17,17 @@ import java.util.List;
 @Dao
 public interface NewDAO {
 
+
+    //Metodo para insertar en la base de datos y reemplazar en la misma
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(New noticia);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void inest(List<New> noticias);
-
+    //Obtener de la lista de noticias
     @Query("SELECT * FROM  new")
+    //Funcion para obtener todas las noticias seleccionadas de las tablas
     LiveData<List<New>> getAllNews();
 
+    //Funcion para obtener noticias por categoria de juego de la base de datos
     @Query("SELECT * FROM  new WHERE game = :game")
     LiveData<List<New>> getAllNews(String game);
 

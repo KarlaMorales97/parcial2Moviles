@@ -95,13 +95,16 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
+        //Seteneamos al recyclerView nuestro adapter
         recyclerView.setAdapter(myAdapter);
 
 
+        //Obtenemos las noticias de la base de datos
+        //Funcion declarada en NewDAO
         newsViewModel.getAllNews().observe(this, new Observer<List<New>>() {
             @Override
             public void onChanged(@Nullable List<New> news) {
+                //Seteamos las noticias al adapter
                 myAdapter.setNews(news);
             }
         });

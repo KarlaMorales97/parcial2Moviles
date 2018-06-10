@@ -15,6 +15,7 @@ import java.lang.reflect.Type;
  * Created by Karla on 05/06/2018.
  */
 
+//Implementamos Json que nos deserializara los datos
 public class Token_Login implements JsonDeserializer<String> {
 
 
@@ -27,9 +28,11 @@ public class Token_Login implements JsonDeserializer<String> {
 
         if(json.getAsJsonObject()!=null){
             JsonObject getToken = json.getAsJsonObject();
+            //Obtenemos el token desde la API
             token= getToken.get("token").getAsString();
 
         }
+        //Retornamos el token
         return token;
     }
 }

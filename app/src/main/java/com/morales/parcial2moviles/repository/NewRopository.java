@@ -41,22 +41,30 @@ public class NewRopository {
     Context context;
 
 
+
+    //Constructor que recibe una aplicacion
+
     public NewRopository(Application application) {
+        //Inicializamos la base de datos y la obtenemos
         DatabaseGameNews db = DatabaseGameNews.getDatabase(application);
+        //Obtenemos el DAO
         mDao = db.newDAO();
+        //Insertamos en el DAO las noticias obtenidad
         mNews = mDao.getAllNews();
+        //Creamos el shared preferences el cual tiene guardado el token recibido
         SharedPreferences sharedPreferences = application.getSharedPreferences("mToken", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("token", "");
     }
 
 
+    //Se crea un LiveData para obtener los datos actualizados de las noticias
     public LiveData<List<New>> getAllNews() {
+        //Funcion que obtiene las noticias recibidas
         getAllNewsAPI();
         return mNews;
     }
 
     //Funcion que obtiene los datos halados de la API
-
     private void getAllNewsAPI() {
 
         //Creamos el retrofit el cual nos ayudara a parsear el JSON automaticamente
@@ -67,8 +75,10 @@ public class NewRopository {
                 .build();
 
 
+        //Creamos el retrofit
         GameNewsAPI apiData = retrofit.create(GameNewsAPI.class);
 
+        //Hacemos una llamada para adquirir el token
         Call<List<New>> data = apiData.getData("Bearded " + token);
 
         //Hacemos la devolucion de llamada para comprobar que la funcion de lamada fue exitosa
@@ -89,6 +99,7 @@ public class NewRopository {
                 }
             }
 
+            //Comprobando si la llamada fallo totalmente
             @Override
             public void onFailure(Call<List<New>> call, Throwable t) {
 
@@ -104,7 +115,7 @@ public class NewRopository {
 
 
 
-    //insertAsyncTask hilo de segundo plano
+    //Se crea un insertAsyncTask que es un hilo de segundo plano
     private static class insertAsyncTask extends AsyncTask<New, Void, Void> {
 
         private NewDAO mAsyncTaskDao;

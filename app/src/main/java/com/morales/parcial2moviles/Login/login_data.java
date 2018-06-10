@@ -8,10 +8,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class login_data {
 
-
+   //Declaramos id
    @SerializedName("_id")
    private String id;
 
+   //Declaramos fecha
    @SerializedName("created_date")
    private String date;
 
@@ -23,10 +24,13 @@ public class login_data {
    private String user;
    private String password;
 
+   //Constructor usado para login el cual solo recibe un usuario y contrasenia
    public login_data(String user, String password) {
       this.user = user;
       this.password = password;
    }
+
+   //SETTERS Y GETTERS
 
    public String getId() {
       return id;

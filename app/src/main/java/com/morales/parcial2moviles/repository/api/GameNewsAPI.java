@@ -18,15 +18,18 @@ import retrofit2.http.POST;
 public interface GameNewsAPI {
 
 
+    //URL donde esta ubicada la API
     public  final String URL= "http://gamenewsuca.herokuapp.com";
 
-    @GET("/news") Call<List<New>> getData(@Header("Authorization") String datos);
 
-    //Mandando y recibiendo datos de usuario a la API
+    //Mandando y recibiendo datos de usuario a la API con el metodo POST
     @FormUrlEncoded
     @POST("/login") Call<String> login(@Field("user") String myUser, @Field("password") String myPassword);
 
-    //Obteniendo datos de /news, la descripcion de cada noticia
+    //Obteniendo datos de /news, la descripcion de cada noticia con el metodo GET y HEADER
+
+    @GET("/news") Call<List<New>> getData(@Header("Authorization") String datos);
+
 
 
 

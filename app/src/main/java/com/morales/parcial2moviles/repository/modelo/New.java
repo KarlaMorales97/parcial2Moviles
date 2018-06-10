@@ -22,6 +22,7 @@ public class New {
     private String createdDate;
     private String description;
 
+    //Creamos el id para la base de datos y lo nombramos llave primaria
     @PrimaryKey
     @ColumnInfo(name = "_id")
     @SerializedName("_id")
@@ -29,11 +30,13 @@ public class New {
     private String id;
 
 
+    //Constructor usado para los cardview donde se muestra solo la imagen y el titulo de la noticia
     public New(String title, String coverImage) {
         this.title = title;
         this.coverImage = coverImage;
     }
 
+    //Constructor vacio
     public New() {
     }
 
