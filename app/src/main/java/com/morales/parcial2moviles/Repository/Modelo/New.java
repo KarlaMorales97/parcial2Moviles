@@ -1,4 +1,4 @@
-package com.morales.parcial2moviles.repository.modelo;
+package com.morales.parcial2moviles.Repository.Modelo;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -27,6 +27,7 @@ public class New {
     @ColumnInfo(name = "_id")
     @SerializedName("_id")
     @NonNull
+
     private String id;
 
 

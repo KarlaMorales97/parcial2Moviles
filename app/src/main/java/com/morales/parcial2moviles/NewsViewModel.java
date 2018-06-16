@@ -5,8 +5,10 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
-import com.morales.parcial2moviles.repository.NewRopository;
-import com.morales.parcial2moviles.repository.modelo.New;
+import com.morales.parcial2moviles.Repository.Modelo.Game;
+import com.morales.parcial2moviles.Repository.Modelo.Player_Games;
+import com.morales.parcial2moviles.Repository.NewRopository;
+import com.morales.parcial2moviles.Repository.Modelo.New;
 
 import java.util.List;
 
@@ -21,7 +23,6 @@ public class NewsViewModel extends AndroidViewModel {
     //Creamos el observable que nos permitira que los datos siempre esten actualizados
     private LiveData<List<New>> mNews;
 
-
     //Constructor que recibe application
     public NewsViewModel(@NonNull Application application) {
         super(application);
@@ -35,4 +36,5 @@ public class NewsViewModel extends AndroidViewModel {
     public LiveData<List<New>> getAllNews(){
         return mNews;
     }
+
 }

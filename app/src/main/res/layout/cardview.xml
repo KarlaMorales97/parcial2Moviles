@@ -10,6 +10,9 @@
     app:cardBackgroundColor="#f1e4ee"
     cardview:cardCornerRadius="5dp">
 
+
+
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -19,8 +22,8 @@
             android:id="@+id/new_image"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:scaleType="centerCrop"
-            android:background="#000"/>
+            android:background="#000"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/new_tittle"
@@ -32,7 +35,19 @@
             android:text="Book tittle"
             android:textSize="14sp"
             android:textColor="#940f68"/>
-        
+
+
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/fav"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="150dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:background="#efc0e0"
+        android:button="@drawable/customdrawablecheckbox"
+        android:checked="false" />
 
 </android.support.v7.widget.CardView>

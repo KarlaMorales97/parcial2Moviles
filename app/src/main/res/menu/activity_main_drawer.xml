@@ -16,17 +16,9 @@
 
         <menu>
 
-            <item android:id="@+id/nav_legue"
+            <item android:id="@+id/item_games"
                 android:icon="@drawable/ic_toys"
                 android:title="Legue Of Legends" />
-            <item
-                android:id="@+id/nav_dota"
-                android:icon="@drawable/ic_toys"
-                android:title="Dota" />
-            <item
-                android:id="@+id/nav_cs"
-                android:icon="@drawable/ic_toys"
-                android:title="CS GO" />
 
         </menu>
 

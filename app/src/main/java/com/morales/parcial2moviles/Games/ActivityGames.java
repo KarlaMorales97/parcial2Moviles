@@ -1,9 +1,15 @@
 package com.morales.parcial2moviles.Games;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -17,11 +23,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.TextView;
-
+import com.morales.parcial2moviles.PlayerViewModel;
 import com.morales.parcial2moviles.R;
+import com.morales.parcial2moviles.Repository.Modelo.Player_Games;
 
-public class Dota extends AppCompatActivity {
+import java.util.List;
+
+public class ActivityGames extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -37,11 +45,14 @@ public class Dota extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    public int number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dota);
+        setContentView(R.layout.tab_games);
+
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,7 +64,7 @@ public class Dota extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsDOTA);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -67,13 +78,15 @@ public class Dota extends AppCompatActivity {
             }
         });
 
+
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_dota, menu);
+        getMenuInflater().inflate(R.menu.menu_player, menu);
         return true;
     }
 
@@ -96,6 +109,11 @@ public class Dota extends AppCompatActivity {
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
+
+        RecyclerView recyclerView;
+        AdapterPlayer adapterPlayer;
+        PlayerViewModel playerViewModel;
+        LinearLayoutManager linearLayoutManager;
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -113,6 +131,7 @@ public class Dota extends AppCompatActivity {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+
             fragment.setArguments(args);
             return fragment;
         }
@@ -120,11 +139,39 @@ public class Dota extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_dota, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
+
+            PlayerViewModel playerViewModel;
+            View rootView = inflater.inflate(R.layout.fragment_game, container, false);
+
+
+            playerViewModel = ViewModelProviders.of(this).get(PlayerViewModel.class);
+
+
+                //RecyclerView
+                //Buscamos el id del recyclerview
+                RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclerviewPlayerID);
+                final AdapterPlayer adapterPlayer = new AdapterPlayer(getContext());
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
+
+                recyclerView.setLayoutManager(gridLayoutManager);
+                recyclerView.setAdapter(adapterPlayer);
+
+
+                playerViewModel.getmPlayers().observe(this, new Observer<List<Player_Games>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Player_Games> players) {
+                        //Seteamos las noticias al adapter
+                        //String bli = news.get(0).getGame().toString();
+                        //Toast.makeText(getApplication(), bli, Toast.LENGTH_SHORT).show();
+                        adapterPlayer.setPlayers(players);
+
+                    }
+                });
+
+
+                return rootView;
+            }
+
     }
 
     /**

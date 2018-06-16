@@ -1,11 +1,11 @@
-package com.morales.parcial2moviles.repository.api;
+package com.morales.parcial2moviles.Repository.Api;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.morales.parcial2moviles.repository.modelo.New;
+import com.morales.parcial2moviles.Repository.Modelo.New;
 
 import java.lang.reflect.Type;
 
@@ -23,7 +23,7 @@ public class NewDeserializer implements JsonDeserializer<New> {
 
         JsonObject newJsonObject =  json.getAsJsonObject();
 
-        //Se recibe datos del objeto Json y se parsean a string
+    //Se recibe datos del objeto Json y se parsean a string
 
         noticias.setId(newJsonObject.get("_id").getAsString());
         noticias.setTitle(newJsonObject.get("title").getAsString());

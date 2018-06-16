@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#eccee5"
+    android:layout_margin="11dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.morales.parcial2moviles.News.See_Details_GameNews"
+   >
+
+
+    <ImageView
+        android:id="@+id/AvatarSee_Player"
+        android:layout_marginTop="15dp"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:background="#000"
+        android:layout_gravity="center"/>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/NombreSee_Player"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Nombre"
+                android:textSize="30dp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="#b7228d"
+                android:layout_gravity="center"/>
+
+
+            <TextView
+                android:id="@+id/BiografiaSee_Player"
+                android:background="#f9e4f2"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:textAlignment="center"
+                android:text=" Biografia "
+                android:textColor="#b4408f"
+                android:textSize="20dp"/>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
+

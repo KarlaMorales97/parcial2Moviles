@@ -27,6 +27,11 @@
         completions."
     </string>
         <string name="title_activity_prueb">Sign in</string>
+    <string name="title_activity_see__details__game_news">See_Details_GameNews</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_player">PlayerActivity</string>
 
  
 </resources>

@@ -1,27 +1,23 @@
-package com.morales.parcial2moviles.repository;
+package com.morales.parcial2moviles.Repository;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.morales.parcial2moviles.News.Adapter;
-import com.morales.parcial2moviles.R;
-import com.morales.parcial2moviles.repository.api.GameNewsAPI;
-import com.morales.parcial2moviles.repository.db.DatabaseGameNews;
-import com.morales.parcial2moviles.repository.db.NewDAO;
-import com.morales.parcial2moviles.repository.modelo.New;
+import com.morales.parcial2moviles.Repository.Api.GameNewsAPI;
+import com.morales.parcial2moviles.Repository.DataBase.Database;
+import com.morales.parcial2moviles.Repository.DataBase.News.NewDAO;
+import com.morales.parcial2moviles.Repository.DataBase.Players.PlayersDAO;
+import com.morales.parcial2moviles.Repository.Modelo.Game;
+import com.morales.parcial2moviles.Repository.Modelo.New;
+import com.morales.parcial2moviles.Repository.Modelo.Player_Games;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,26 +31,35 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NewRopository {
     //Se crea el observable
     private LiveData<List<New>> mNews;
+    private LiveData<List<Game>> mGames;
+
     private NewDAO mDao;
+    private NewDAO mDaoGame;
     private GameNewsAPI mAPI;
     private String token;
     Context context;
 
+    public NewRopository(Context context) {
+        this.context = context;
+    }
 
 
-    //Constructor que recibe una aplicacion
+//Constructor que recibe una aplicacion
 
     public NewRopository(Application application) {
         //Inicializamos la base de datos y la obtenemos
-        DatabaseGameNews db = DatabaseGameNews.getDatabase(application);
+        Database db = Database.getDatabase(application);
         //Obtenemos el DAO
         mDao = db.newDAO();
+        mDaoGame = db.newDAO();
         //Insertamos en el DAO las noticias obtenidad
         mNews = mDao.getAllNews();
+        mGames = mDaoGame.getAllGames();
         //Creamos el shared preferences el cual tiene guardado el token recibido
         SharedPreferences sharedPreferences = application.getSharedPreferences("mToken", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("token", "");
     }
+
 
 
     //Se crea un LiveData para obtener los datos actualizados de las noticias
@@ -63,6 +68,7 @@ public class NewRopository {
         getAllNewsAPI();
         return mNews;
     }
+
 
     //Funcion que obtiene los datos halados de la API
     private void getAllNewsAPI() {
@@ -131,4 +137,101 @@ public class NewRopository {
             return null;
         }
     }
+
+    //GAMEEES//
+
+
+    //Se crea un LiveData para obtener los datos actualizados de games
+    public LiveData<List<Game>> getAllGames() {
+        //Funcion que obtiene las noticias recibidas
+        getAllgamesAPI();
+        return mGames;
+    }
+
+
+    private void getAllgamesAPI() {
+        //Creamos el retrofit el cual nos ayudara a parsear el JSON automaticamente
+        //a POJO
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(GameNewsAPI.URL)
+                .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .build();
+
+
+        //Creamos el retrofit
+        GameNewsAPI gameData = retrofit.create(GameNewsAPI.class);
+
+
+        //Hacemos una llamada para adquirir el token
+        Call<List<Game>> gamess = gameData.getGamess("Bearded " + token);
+
+        //Hacemos la devolucion de llamada para comprobar que la funcion de lamada fue exitosa
+        gamess.enqueue(new Callback<List<Game>>() {
+
+            @Override
+            public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "HOLIIS", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(context, "HOLIIS", Toast.LENGTH_SHORT).show();
+                    List<Game> games = response.body();
+                    for (Game game : games) {
+                        insert2(game);
+                    }
+                    Toast.makeText(context, "HOLIIS", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, games.get(0).getGameCategory(), Toast.LENGTH_SHORT).show();
+                }
+                else if(!response.isSuccessful()){
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Game>> call, Throwable t) {
+            }
+
+        });
+    }
+
+    //Insertamos games a la base de datos
+    public void insert2(Game games) {
+        new insertAsyncTask2(mDaoGame).execute(games);
+    }
+
+
+    //Se crea un insertAsyncTask que es un hilo de segundo plano GAMEES
+    private static class insertAsyncTask2 extends AsyncTask<Game, Void, Void> {
+
+        private NewDAO mAsyncTaskDao2;
+
+        insertAsyncTask2(NewDAO newDAO) {
+            mAsyncTaskDao2 = newDAO;
+        }
+
+        @Override
+        protected Void doInBackground(final Game... games) {
+            mAsyncTaskDao2.insert2(games[0]);
+            return null;
+
+        }
+    }
+
+
+
+    ///GAMES////
+
+
+
+
+    //PLAYERS//
+
+
+
+
+
+
+    ///PLAYERS////
+
+
+
+
 }

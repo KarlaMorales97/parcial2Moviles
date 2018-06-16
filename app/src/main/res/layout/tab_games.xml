@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.morales.parcial2moviles.Games.Dota">
+    tools:context="com.morales.parcial2moviles.Games.ActivityGames">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -23,12 +23,12 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="DOTA">
+            app:title="@string/app_name">
 
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabsDOTA"
+            android:id="@+id/tabs"
             app:tabTextColor="#212121"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -67,5 +67,7 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
+
+
 
 </android.support.design.widget.CoordinatorLayout>

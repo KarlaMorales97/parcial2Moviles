@@ -36,7 +36,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.morales.parcial2moviles.repository.api.GameNewsAPI;
+import com.morales.parcial2moviles.Repository.Api.GameNewsAPI;
 import com.morales.parcial2moviles.MainActivity;
 import com.morales.parcial2moviles.R;
 
@@ -110,6 +110,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
         });
+
+
+
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -195,11 +198,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         editor.putString("token",token);
         editor.apply();
 
-     //Verificamos si shared preferences esta vacio o no y si no lo esta la primera acctividad sera ActivityMain
-        if(sharedPreferences.contains("mToken")){
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        //Verificamos si shared preferences esta vacio o no y si no lo esta la primera acctividad sera ActivityMain
+        //Creamos el shared preferences el cual tiene guardado el token recibido
+        if(!sharedPreferences.contains("token")){
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
+        else {
+            token = sharedPreferences.getString("token", "");
+        }
+
     }
 
 

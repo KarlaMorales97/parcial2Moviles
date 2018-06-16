@@ -1,6 +1,7 @@
 package com.morales.parcial2moviles.News;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,14 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.morales.parcial2moviles.R;
-import com.morales.parcial2moviles.repository.api.NewDeserializer;
-import com.morales.parcial2moviles.repository.modelo.New;
+import com.morales.parcial2moviles.Repository.Modelo.New;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,6 +50,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         this.mContext = mContext;
     }
 
+    public Adapter(List<New> mData, Context mContext) {
+        this.mData = mData;
+        this.mContext = mContext;
+    }
+
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
@@ -63,7 +67,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 
 
     @Override
-    public void onBindViewHolder(@NonNull myViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final myViewHolder holder, final int position) {
 
         //Buscamos la posicion actual de la lista
         final New newM = mData.get(position);
@@ -81,6 +85,21 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
             //Imagen por default en caso de que la noticia no tenga imagen alguna
             Picasso.with(mContext).load(R.drawable.karla).error(R.drawable.karla).into(holder.imageView);
         }
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, See_Details_GameNews.class);
+                intent.putExtra("Tittle",newM.getTitle());
+                intent.putExtra("Game", newM.getGame());
+                intent.putExtra("Body", newM.getBody());
+                intent.putExtra("Fecha", newM.getCreated_date());
+                intent.putExtra("Imagen", newM.getCoverImage());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+
+            }
+        });
 
         /*holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
