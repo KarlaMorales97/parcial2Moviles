@@ -1,5 +1,6 @@
 package com.morales.parcial2moviles.News;
 
+import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -10,11 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.morales.parcial2moviles.R;
 import com.morales.parcial2moviles.Repository.Modelo.New;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
  * Created by Karla on 03/06/2018.
  */
 
-public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
+public class AdapterNews extends RecyclerView.Adapter<AdapterNews.myViewHolder> {
 
     private List<New> mData;
     private Context mContext;
@@ -46,11 +47,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 
 
     //Constructor que tiene el contexto
-    public Adapter( Context mContext) {
+    public AdapterNews(Context mContext) {
         this.mContext = mContext;
     }
 
-    public Adapter(List<New> mData, Context mContext) {
+    public AdapterNews(List<New> mData, Context mContext) {
         this.mData = mData;
         this.mContext = mContext;
     }
@@ -119,7 +120,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         mData = news;
         notifyDataSetChanged();
     }
+    public void setNewsByGame(List<New> news2){
 
+
+                mData = news2;
+                notifyDataSetChanged();
+
+
+    }
 
     //Obtenemos el tamanio de la lista
     @Override

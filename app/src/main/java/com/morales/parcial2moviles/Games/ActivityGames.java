@@ -2,6 +2,7 @@ package com.morales.parcial2moviles.Games;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -23,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.morales.parcial2moviles.MainActivity;
 import com.morales.parcial2moviles.PlayerViewModel;
 import com.morales.parcial2moviles.R;
 import com.morales.parcial2moviles.Repository.Modelo.Player_Games;
@@ -45,7 +47,7 @@ public class ActivityGames extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    public int number;
+    public String game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +56,19 @@ public class ActivityGames extends AppCompatActivity {
 
 
 
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        //Button Back
+
+
+      getSupportActionBar().setDisplayShowTitleEnabled(true);
+      getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -99,6 +112,7 @@ public class ActivityGames extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            onBackPressed();
             return true;
         }
 
@@ -127,12 +141,14 @@ public class ActivityGames extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
+        public static PlaceholderFragment newInstance(String game) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 
+            args.putString("game", game);
             fragment.setArguments(args);
+
+
             return fragment;
         }
 
@@ -140,11 +156,11 @@ public class ActivityGames extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 
-            PlayerViewModel playerViewModel;
-            View rootView = inflater.inflate(R.layout.fragment_game, container, false);
+     //       PlayerViewModel playerViewModel;
+            View rootView = inflater.inflate(R.layout.tab_games, container, false);
 
 
-            playerViewModel = ViewModelProviders.of(this).get(PlayerViewModel.class);
+       /*     playerViewModel = ViewModelProviders.of(this).get(PlayerViewModel.class);
 
 
                 //RecyclerView
@@ -166,7 +182,7 @@ public class ActivityGames extends AppCompatActivity {
                         adapterPlayer.setPlayers(players);
 
                     }
-                });
+                }); */
 
 
                 return rootView;
@@ -186,9 +202,20 @@ public class ActivityGames extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    GeneralFragment generalFragment= new GeneralFragment();
+                    return generalFragment;
+
+                case 1:
+                    PlayersFragment playersFragment = new PlayersFragment();
+                    return playersFragment;
+                case 2:
+                    PlayersFragment playersFragment2 = new PlayersFragment();
+                    return playersFragment2;
+
+                default: return null;
+            }
         }
 
         @Override

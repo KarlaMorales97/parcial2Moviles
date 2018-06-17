@@ -2,7 +2,9 @@ package com.morales.parcial2moviles;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -19,7 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.morales.parcial2moviles.News.Adapter;
+import com.morales.parcial2moviles.News.AdapterNews;
 import com.morales.parcial2moviles.Repository.Api.GameDeserializer;
 import com.morales.parcial2moviles.Games.ActivityGames;
 import com.morales.parcial2moviles.Repository.Modelo.New;
@@ -48,6 +50,12 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
+        SharedPreferences sharedPreferences = this.getSharedPreferences("mGame", Context.MODE_PRIVATE); //Inicializamos el SharedPreference
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Game","lol");
+        editor.apply();
+
+
         listItem = new ArrayList<>();
         newsViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
         gamesViewModel = ViewModelProviders.of(this).get(GamesViewModel.class);
@@ -73,7 +81,7 @@ public class MainActivity extends AppCompatActivity
 
         //Buscamos el id del recyclerview
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
-        final Adapter myAdapter = new Adapter(getApplicationContext());
+        final AdapterNews myAdapter = new AdapterNews(getApplicationContext());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
 
         recyclerView.setLayoutManager(gridLayoutManager);

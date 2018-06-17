@@ -31,11 +31,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NewRopository {
     //Se crea el observable
     private LiveData<List<New>> mNews;
+    private LiveData<List<New>> mNewsLol;
     private LiveData<List<Game>> mGames;
+    private LiveData<List<String>> mGame;
+
 
     private NewDAO mDao;
     private NewDAO mDaoGame;
     private GameNewsAPI mAPI;
+    private String game;
     private String token;
     Context context;
 
@@ -49,17 +53,26 @@ public class NewRopository {
     public NewRopository(Application application) {
         //Inicializamos la base de datos y la obtenemos
         Database db = Database.getDatabase(application);
+
+        //Creamos el shared preferences el cual tiene guardado el token recibido
+        SharedPreferences sharedPreferences = application.getSharedPreferences("mToken", Context.MODE_PRIVATE);
+        token = sharedPreferences.getString("token", "");
+
+
+
+        SharedPreferences GameList = application.getSharedPreferences("mGame", Context.MODE_PRIVATE);
+        game =  GameList.getString("Game","");
+
         //Obtenemos el DAO
         mDao = db.newDAO();
         mDaoGame = db.newDAO();
         //Insertamos en el DAO las noticias obtenidad
         mNews = mDao.getAllNews();
         mGames = mDaoGame.getAllGames();
-        //Creamos el shared preferences el cual tiene guardado el token recibido
-        SharedPreferences sharedPreferences = application.getSharedPreferences("mToken", Context.MODE_PRIVATE);
-        token = sharedPreferences.getString("token", "");
-    }
+        mGame = mDao.getGames();
+        mNewsLol = mDao.getAllNewsByGame("lol");
 
+    }
 
 
     //Se crea un LiveData para obtener los datos actualizados de las noticias
@@ -67,6 +80,16 @@ public class NewRopository {
         //Funcion que obtiene las noticias recibidas
         getAllNewsAPI();
         return mNews;
+    }
+    public LiveData<List<String>> getGamess() {
+        return mGame;
+    }
+
+
+    public LiveData<List<New>> getAllNewsLol() {
+        //Funcion que obtiene las noticias recibidas
+        getAllNewsAPI();
+        return mNewsLol;
     }
 
 

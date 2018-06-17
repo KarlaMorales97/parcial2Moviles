@@ -18,7 +18,7 @@
 
             <item android:id="@+id/item_games"
                 android:icon="@drawable/ic_toys"
-                android:title="Legue Of Legends" />
+                android:title="More about games..." />
 
         </menu>
 

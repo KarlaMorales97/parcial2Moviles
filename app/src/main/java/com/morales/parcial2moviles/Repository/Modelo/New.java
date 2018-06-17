@@ -17,9 +17,10 @@ public class New {
     private String title;
     private String body;
     private String game;
+    @SerializedName("created_date")
     private String created_date;
     private String coverImage;
-    private String createdDate;
+   // private String createdDate;
     private String description;
 
     //Creamos el id para la base de datos y lo nombramos llave primaria
@@ -70,10 +71,6 @@ public class New {
         return coverImage;
     }
 
-    public String getCreatedDate() {
-        return createdDate;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -100,9 +97,7 @@ public class New {
         this.coverImage = coverImage;
     }
 
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
-    }
+
 
     public void setDescription(String description) {
         this.description = description;

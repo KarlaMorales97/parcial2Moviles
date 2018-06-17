@@ -28,10 +28,13 @@ public interface NewDAO {
     void insert2(Game... juego);
 
     //Obtener de la lista de noticias
-    @Query("SELECT * FROM  new")
+    @Query("SELECT * FROM  new ORDER BY created_date DESC")
     //Funcion para obtener todas las noticias seleccionadas de las tablas
     LiveData<List<New>> getAllNews();
 
+
+    @Query("SELECT DISTINCT game FROM new ")
+    LiveData<List<String>> getGames();
 
     @Query("SELECT * FROM  gameCategory")
         //Funcion para obtener todas las noticias seleccionadas de las tablas
@@ -40,8 +43,8 @@ public interface NewDAO {
 
 
     //Funcion para obtener noticias por categoria de juego de la base de datos
-    @Query("SELECT * FROM  new WHERE game = :game")
-    LiveData<List<New>> getAllNewsByGame(String game);
+    @Query("SELECT * FROM  new WHERE game = :games ORDER BY created_date DESC")
+    LiveData<List<New>> getAllNewsByGame(String games);
 
 
 

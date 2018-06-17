@@ -39,7 +39,8 @@
             android:name=".Games.ActivityGames"
             android:label="Games"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <activity android:name=".Games.SeePlayers"
             android:label="Players"
             android:parentActivityName=".Games.ActivityGames"></activity>

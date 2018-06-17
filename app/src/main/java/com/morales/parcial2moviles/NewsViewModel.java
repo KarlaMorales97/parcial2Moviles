@@ -22,7 +22,8 @@ public class NewsViewModel extends AndroidViewModel {
 
     //Creamos el observable que nos permitira que los datos siempre esten actualizados
     private LiveData<List<New>> mNews;
-
+    private LiveData<List<New>> mNewsbyGame;
+    private LiveData<List<New>> mNewsGameLol;
     //Constructor que recibe application
     public NewsViewModel(@NonNull Application application) {
         super(application);
@@ -30,11 +31,16 @@ public class NewsViewModel extends AndroidViewModel {
         newRopository = new NewRopository(application);
         //Obteniendo las noticias e insertandolas en la lista de LiveData de noticias
         mNews = newRopository.getAllNews();
+      //  mNewsbyGame = newRopository.getAllNewsByGame();
+        mNewsGameLol = newRopository.getAllNewsLol();
     }
 
     //La vista de liveData retorna las noticias insertadas
     public LiveData<List<New>> getAllNews(){
         return mNews;
     }
-
+    public LiveData<List<New>> getAllNewsByGame(){
+        return mNewsbyGame;
+    }
+    public LiveData<List<New>> getAllNewsLol(){ return mNewsGameLol; }
 }
