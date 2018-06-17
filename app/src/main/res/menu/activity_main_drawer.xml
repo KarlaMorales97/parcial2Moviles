@@ -16,9 +16,17 @@
 
         <menu>
 
-            <item android:id="@+id/item_games"
+            <item android:id="@+id/lol"
                 android:icon="@drawable/ic_toys"
-                android:title="More about games..." />
+                android:title="Lol" />
+
+            <item android:id="@+id/overwatch"
+                android:icon="@drawable/ic_toys"
+                android:title="Overwatch" />
+
+            <item android:id="@+id/csgo"
+                android:icon="@drawable/ic_toys"
+                android:title="Csgo" />
 
         </menu>
 

@@ -1,38 +1,35 @@
-package com.morales.parcial2moviles.Games;
+package com.morales.parcial2moviles.Games.Overwatch;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.morales.parcial2moviles.Games.AdapterPlayer;
+import com.morales.parcial2moviles.Games.Csgo.ActivityCsgo;
+import com.morales.parcial2moviles.Games.Csgo.PlayersCsgo;
+import com.morales.parcial2moviles.Games.Lol.PlayersLol;
 import com.morales.parcial2moviles.MainActivity;
-import com.morales.parcial2moviles.PlayerViewModel;
+import com.morales.parcial2moviles.ViewModels.PlayerViewModel;
 import com.morales.parcial2moviles.R;
-import com.morales.parcial2moviles.Repository.Modelo.Player_Games;
 
-import java.util.List;
+/**
+ * Created by Karla on 16/06/2018.
+ */
 
-public class ActivityGames extends AppCompatActivity {
-
+public class ActivityOverwatch extends AppCompatActivity {
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -41,7 +38,7 @@ public class ActivityGames extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private ActivityOverwatch.SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -56,17 +53,15 @@ public class ActivityGames extends AppCompatActivity {
 
 
 
-
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
 
         //Button Back
 
 
-      getSupportActionBar().setDisplayShowTitleEnabled(true);
-      getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowTitleEnabled(true);
+  //      getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         // Create the adapter that will return a fragment for each of the three
@@ -82,17 +77,19 @@ public class ActivityGames extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
+
+
+        //BOTON FLOTANTE DONDE SE INICIA LA NUEVA ACTIVIDAD PARA REGRESAR AL MAINACTIVITY
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //NEW ACTIVITY
+                Intent i = new Intent(ActivityOverwatch.this, MainActivity.class);
+                startActivityForResult(i, 1);
+
             }
         });
-
-
-
     }
 
 
@@ -141,8 +138,8 @@ public class ActivityGames extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(String game) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static ActivityOverwatch.PlaceholderFragment newInstance(String game) {
+            ActivityOverwatch.PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
 
             args.putString("game", game);
@@ -156,37 +153,14 @@ public class ActivityGames extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 
-     //       PlayerViewModel playerViewModel;
+            //       PlayerViewModel playerViewModel;
             View rootView = inflater.inflate(R.layout.tab_games, container, false);
 
 
-       /*     playerViewModel = ViewModelProviders.of(this).get(PlayerViewModel.class);
 
 
-                //RecyclerView
-                //Buscamos el id del recyclerview
-                RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclerviewPlayerID);
-                final AdapterPlayer adapterPlayer = new AdapterPlayer(getContext());
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
-
-                recyclerView.setLayoutManager(gridLayoutManager);
-                recyclerView.setAdapter(adapterPlayer);
-
-
-                playerViewModel.getmPlayers().observe(this, new Observer<List<Player_Games>>() {
-                    @Override
-                    public void onChanged(@Nullable List<Player_Games> players) {
-                        //Seteamos las noticias al adapter
-                        //String bli = news.get(0).getGame().toString();
-                        //Toast.makeText(getApplication(), bli, Toast.LENGTH_SHORT).show();
-                        adapterPlayer.setPlayers(players);
-
-                    }
-                }); */
-
-
-                return rootView;
-            }
+            return rootView;
+        }
 
     }
 
@@ -204,14 +178,14 @@ public class ActivityGames extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    GeneralFragment generalFragment= new GeneralFragment();
+                    GeneralOverwatch generalFragment= new GeneralOverwatch();
                     return generalFragment;
 
                 case 1:
-                    PlayersFragment playersFragment = new PlayersFragment();
+                    PlayersCsgo playersFragment = new PlayersCsgo();
                     return playersFragment;
                 case 2:
-                    PlayersFragment playersFragment2 = new PlayersFragment();
+                    PlayersLol playersFragment2 = new PlayersLol();
                     return playersFragment2;
 
                 default: return null;

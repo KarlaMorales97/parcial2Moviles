@@ -1,4 +1,4 @@
-package com.morales.parcial2moviles;
+package com.morales.parcial2moviles.ViewModels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;

@@ -32,6 +32,8 @@ public class NewRopository {
     //Se crea el observable
     private LiveData<List<New>> mNews;
     private LiveData<List<New>> mNewsLol;
+    private LiveData<List<New>> mNewsOverwatch;
+    private LiveData<List<New>> mNewsCsgo;
     private LiveData<List<Game>> mGames;
     private LiveData<List<String>> mGame;
 
@@ -71,6 +73,8 @@ public class NewRopository {
         mGames = mDaoGame.getAllGames();
         mGame = mDao.getGames();
         mNewsLol = mDao.getAllNewsByGame("lol");
+        mNewsOverwatch = mDao.getAllNewsByGame("overwatch");
+        mNewsCsgo = mDao.getAllNewsByGame("csgo");
 
     }
 
@@ -90,6 +94,16 @@ public class NewRopository {
         //Funcion que obtiene las noticias recibidas
         getAllNewsAPI();
         return mNewsLol;
+    }
+    public LiveData<List<New>> getAllNewsOverwatch() {
+        //Funcion que obtiene las noticias recibidas
+        getAllNewsAPI();
+        return mNewsOverwatch;
+    }
+    public LiveData<List<New>> getAllNewsCsgo() {
+        //Funcion que obtiene las noticias recibidas
+        getAllNewsAPI();
+        return mNewsCsgo;
     }
 
 

@@ -1,4 +1,4 @@
-package com.morales.parcial2moviles.Games;
+package com.morales.parcial2moviles.Games.Overwatch;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,53 +9,34 @@ import android.view.ViewGroup;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.morales.parcial2moviles.Games.Lol.GeneralLol;
+import com.morales.parcial2moviles.MainActivity;
 import com.morales.parcial2moviles.News.AdapterNews;
-import com.morales.parcial2moviles.NewsViewModel;
-import com.morales.parcial2moviles.PlayerViewModel;
+import com.morales.parcial2moviles.ViewModels.NewsViewModel;
 import com.morales.parcial2moviles.R;
 import com.morales.parcial2moviles.Repository.DataBase.News.NewDAO;
 import com.morales.parcial2moviles.Repository.Modelo.New;
-import com.morales.parcial2moviles.Repository.Modelo.Player_Games;
 
 import java.util.List;
-import com.morales.parcial2moviles.R;
 
 /**
  * Created by Karla on 16/06/2018.
  */
 
-
-public class GeneralFragment extends Fragment{
-
+public class GeneralOverwatch extends Fragment {
     String game;
     NewDAO newDAO;
     String gamee;
+    MainActivity mainActivity;
 
-    public static GeneralFragment newInstance(String gamee) {
-        GeneralFragment fragment = new GeneralFragment();
+    public static GeneralLol newInstance(String gamee) {
+        GeneralLol fragment = new GeneralLol();
         Bundle args = new Bundle();
         args.putString("game", gamee);
         fragment.setArguments(args);
@@ -103,27 +84,27 @@ public class GeneralFragment extends Fragment{
                 }
             }
         });
+        newsViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
 
         //Seteneamos al recyclerView nuestro adapter
         recyclerView.setAdapter(myAdapter);
 
 
-            newsViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
-            newsViewModel.getAllNewsLol().observe(this, new Observer<List<New>>() {
-                @Override
-                public void onChanged(@Nullable List<New> news) {
-                        //Seteamos las noticias al adapter
-                        myAdapter.setNews(news);
 
 
-                }
-            });
+        newsViewModel.getAllNewsOverwatch().observe(this, new Observer<List<New>>() {
+            @Override
+            public void onChanged(@Nullable List<New> news) {
+                //Seteamos las noticias al adapter
+                myAdapter.setNews(news);
 
 
-            return rootView;
+            }
+        });
 
-        }
 
+        return rootView;
 
+    }
 
 }

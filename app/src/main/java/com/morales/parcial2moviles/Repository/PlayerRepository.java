@@ -1,4 +1,4 @@
-package com.morales.parcial2moviles;
+package com.morales.parcial2moviles.Repository;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
@@ -29,12 +29,19 @@ public class PlayerRepository {
 
     private PlayersDAO mDaoPlayer;
     private LiveData<List<Player_Games>> mPlayer;
+    private LiveData<List<Player_Games>> mPlayerLol;
+    private LiveData<List<Player_Games>> mPlayerOverwatch;
+    private LiveData<List<Player_Games>> mPlayerCsgo;
     private String token;
 
     public PlayerRepository(Application application) {
         Database db = Database.getDatabase(application);
         mDaoPlayer = db.playersDao();
+
         mPlayer = mDaoPlayer.getAllPlayers();
+        mPlayerLol = mDaoPlayer.getAllPlayersByGame("lol");
+        mPlayerOverwatch = mDaoPlayer.getAllPlayersByGame("overwatch");
+        mPlayerCsgo = mDaoPlayer.getAllPlayersByGame("csgo");
         //Creamos el shared preferences el cual tiene guardado el token recibido
         SharedPreferences sharedPreferences = application.getSharedPreferences("mToken", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("token", "");
@@ -46,6 +53,23 @@ public class PlayerRepository {
         //Funcion que obtiene las noticias recibidas
         getAllplayersAPI();
         return mPlayer;
+    }
+
+    public LiveData<List<Player_Games>> getAllPlayersLol() {
+        //Funcion que obtiene las noticias recibidas
+        getAllplayersAPI();
+        return mPlayerLol;
+    }
+
+    public LiveData<List<Player_Games>> getAllPlayersOverwatch() {
+        //Funcion que obtiene las noticias recibidas
+        getAllplayersAPI();
+        return mPlayerOverwatch;
+    }
+    public LiveData<List<Player_Games>> getAllPlayersCsgo() {
+        //Funcion que obtiene las noticias recibidas
+        getAllplayersAPI();
+        return mPlayerCsgo;
     }
 
 

@@ -1,4 +1,4 @@
-package com.morales.parcial2moviles;
+package com.morales.parcial2moviles.ViewModels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -22,8 +22,9 @@ public class NewsViewModel extends AndroidViewModel {
 
     //Creamos el observable que nos permitira que los datos siempre esten actualizados
     private LiveData<List<New>> mNews;
-    private LiveData<List<New>> mNewsbyGame;
+    private LiveData<List<New>> mNewsGameOverwatch;
     private LiveData<List<New>> mNewsGameLol;
+    private LiveData<List<New>> mNewsGameCsgo;
     //Constructor que recibe application
     public NewsViewModel(@NonNull Application application) {
         super(application);
@@ -33,14 +34,17 @@ public class NewsViewModel extends AndroidViewModel {
         mNews = newRopository.getAllNews();
       //  mNewsbyGame = newRopository.getAllNewsByGame();
         mNewsGameLol = newRopository.getAllNewsLol();
+        mNewsGameOverwatch = newRopository.getAllNewsOverwatch();
+        mNewsGameCsgo = newRopository.getAllNewsCsgo();
     }
 
     //La vista de liveData retorna las noticias insertadas
     public LiveData<List<New>> getAllNews(){
         return mNews;
     }
-    public LiveData<List<New>> getAllNewsByGame(){
-        return mNewsbyGame;
+    public LiveData<List<New>> getAllNewsOverwatch(){
+        return mNewsGameOverwatch;
     }
     public LiveData<List<New>> getAllNewsLol(){ return mNewsGameLol; }
+    public LiveData<List<New>> getAllNewsCsgo(){ return mNewsGameCsgo; }
 }

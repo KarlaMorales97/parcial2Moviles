@@ -22,4 +22,8 @@ public interface PlayersDAO {
 
     @Query("SELECT * FROM players ORDER BY name DESC")
     LiveData<List<Player_Games>> getAllPlayers();
+
+    //Funcion para obtener noticias por categoria de juego de la base de datos
+    @Query("SELECT * FROM  players WHERE game = :players")
+    LiveData<List<Player_Games>> getAllPlayersByGame(String players);
 }

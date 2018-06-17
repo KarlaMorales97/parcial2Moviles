@@ -21,10 +21,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.morales.parcial2moviles.Games.Csgo.ActivityCsgo;
+import com.morales.parcial2moviles.Games.Overwatch.ActivityOverwatch;
 import com.morales.parcial2moviles.News.AdapterNews;
 import com.morales.parcial2moviles.Repository.Api.GameDeserializer;
-import com.morales.parcial2moviles.Games.ActivityGames;
+import com.morales.parcial2moviles.Games.Lol.ActivityLol;
 import com.morales.parcial2moviles.Repository.Modelo.New;
+import com.morales.parcial2moviles.ViewModels.GamesViewModel;
+import com.morales.parcial2moviles.ViewModels.NewsViewModel;
+import com.morales.parcial2moviles.ViewModels.PlayerViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity
     private PlayerViewModel playerViewModel;
     private List<New> listItem;
     GameDeserializer gameData;
+    String game;
 
 
 
@@ -176,9 +182,23 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_news) {
             // Handle the camera action
-        } else if (id == R.id.item_games) {
+        } else if (id == R.id.lol) {
 
-            Intent intent = new Intent(this, ActivityGames.class);
+            Bundle args = new Bundle();
+            args.putString("game", game);
+            Intent intent = new Intent(this, ActivityLol.class);
+            startActivity(intent);
+            finish();
+
+        } else if (id == R.id.overwatch) {
+
+            Intent intent = new Intent(this, ActivityOverwatch.class);
+            startActivity(intent);
+            finish();
+
+        }else if(id == R.id.csgo){
+
+            Intent intent = new Intent(this, ActivityCsgo.class);
             startActivity(intent);
             finish();
 
