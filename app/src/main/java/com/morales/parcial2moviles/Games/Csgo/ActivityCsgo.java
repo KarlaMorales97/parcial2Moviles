@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.morales.parcial2moviles.Games.AdapterPlayer;
+import com.morales.parcial2moviles.Adapters.AdapterPlayer;
 import com.morales.parcial2moviles.Games.Lol.PlayersLol;
 import com.morales.parcial2moviles.MainActivity;
 import com.morales.parcial2moviles.ViewModels.PlayerViewModel;
@@ -186,7 +186,7 @@ public class ActivityCsgo extends AppCompatActivity {
                     PlayersCsgo playersFragment = new PlayersCsgo();
                     return playersFragment;
                 case 2:
-                    PlayersLol playersFragment2 = new PlayersLol();
+                    ImagenCsgo playersFragment2 = new ImagenCsgo();
                     return playersFragment2;
 
                 default: return null;

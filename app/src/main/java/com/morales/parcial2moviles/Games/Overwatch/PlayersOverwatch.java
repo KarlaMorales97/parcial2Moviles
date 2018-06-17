@@ -15,7 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.morales.parcial2moviles.Games.AdapterPlayer;
+import com.morales.parcial2moviles.Adapters.AdapterPlayer;
 import com.morales.parcial2moviles.ViewModels.PlayerViewModel;
 import com.morales.parcial2moviles.R;
 import com.morales.parcial2moviles.Repository.Modelo.Player_Games;

@@ -23,7 +23,7 @@ import android.view.MenuItem;
 
 import com.morales.parcial2moviles.Games.Csgo.ActivityCsgo;
 import com.morales.parcial2moviles.Games.Overwatch.ActivityOverwatch;
-import com.morales.parcial2moviles.News.AdapterNews;
+import com.morales.parcial2moviles.Adapters.AdapterNews;
 import com.morales.parcial2moviles.Repository.Api.GameDeserializer;
 import com.morales.parcial2moviles.Games.Lol.ActivityLol;
 import com.morales.parcial2moviles.Repository.Modelo.New;

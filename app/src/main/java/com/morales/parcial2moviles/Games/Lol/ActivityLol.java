@@ -19,8 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.morales.parcial2moviles.Games.AdapterPlayer;
-import com.morales.parcial2moviles.Games.Csgo.ActivityCsgo;
+import com.morales.parcial2moviles.Adapters.AdapterPlayer;
 import com.morales.parcial2moviles.MainActivity;
 import com.morales.parcial2moviles.ViewModels.PlayerViewModel;
 import com.morales.parcial2moviles.R;

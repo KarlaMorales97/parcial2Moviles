@@ -25,6 +25,7 @@ public class NewsViewModel extends AndroidViewModel {
     private LiveData<List<New>> mNewsGameOverwatch;
     private LiveData<List<New>> mNewsGameLol;
     private LiveData<List<New>> mNewsGameCsgo;
+    private LiveData<String> ImagenCsgo;
     //Constructor que recibe application
     public NewsViewModel(@NonNull Application application) {
         super(application);
@@ -36,6 +37,7 @@ public class NewsViewModel extends AndroidViewModel {
         mNewsGameLol = newRopository.getAllNewsLol();
         mNewsGameOverwatch = newRopository.getAllNewsOverwatch();
         mNewsGameCsgo = newRopository.getAllNewsCsgo();
+        ImagenCsgo = newRopository.getAllImagesCsgo();
     }
 
     //La vista de liveData retorna las noticias insertadas
@@ -47,4 +49,5 @@ public class NewsViewModel extends AndroidViewModel {
     }
     public LiveData<List<New>> getAllNewsLol(){ return mNewsGameLol; }
     public LiveData<List<New>> getAllNewsCsgo(){ return mNewsGameCsgo; }
+    public LiveData<String> getAllImagesCsgo(){ return ImagenCsgo; }
 }

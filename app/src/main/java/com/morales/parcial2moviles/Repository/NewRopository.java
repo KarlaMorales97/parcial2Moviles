@@ -34,6 +34,7 @@ public class NewRopository {
     private LiveData<List<New>> mNewsLol;
     private LiveData<List<New>> mNewsOverwatch;
     private LiveData<List<New>> mNewsCsgo;
+    private LiveData<String> imagen;
     private LiveData<List<Game>> mGames;
     private LiveData<List<String>> mGame;
 
@@ -75,6 +76,7 @@ public class NewRopository {
         mNewsLol = mDao.getAllNewsByGame("lol");
         mNewsOverwatch = mDao.getAllNewsByGame("overwatch");
         mNewsCsgo = mDao.getAllNewsByGame("csgo");
+        imagen = mDao.getAllImagesByGame("csgo");
 
     }
 
@@ -104,6 +106,11 @@ public class NewRopository {
         //Funcion que obtiene las noticias recibidas
         getAllNewsAPI();
         return mNewsCsgo;
+    }
+    public LiveData<String> getAllImagesCsgo() {
+        //Funcion que obtiene las noticias recibidas
+        getAllNewsAPI();
+        return imagen;
     }
 
 

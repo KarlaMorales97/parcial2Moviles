@@ -17,7 +17,7 @@ import android.support.v4.app.Fragment;
 
 import com.morales.parcial2moviles.Games.Lol.GeneralLol;
 import com.morales.parcial2moviles.MainActivity;
-import com.morales.parcial2moviles.News.AdapterNews;
+import com.morales.parcial2moviles.Adapters.AdapterNews;
 import com.morales.parcial2moviles.ViewModels.NewsViewModel;
 import com.morales.parcial2moviles.R;
 import com.morales.parcial2moviles.Repository.DataBase.News.NewDAO;

@@ -1,4 +1,4 @@
-package com.morales.parcial2moviles.Games;
+package com.morales.parcial2moviles.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,12 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.morales.parcial2moviles.News.See_Details_GameNews;
+import com.morales.parcial2moviles.Games.SeePlayers;
 import com.morales.parcial2moviles.R;
-import com.morales.parcial2moviles.Repository.Modelo.New;
 import com.morales.parcial2moviles.Repository.Modelo.Player_Games;
 import com.squareup.picasso.Picasso;
 

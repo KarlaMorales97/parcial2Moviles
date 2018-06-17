@@ -1,6 +1,5 @@
-package com.morales.parcial2moviles.News;
+package com.morales.parcial2moviles.Adapters;
 
-import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -11,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.morales.parcial2moviles.News.See_Details_GameNews;
 import com.morales.parcial2moviles.R;
 import com.morales.parcial2moviles.Repository.Modelo.New;
 import com.squareup.picasso.Picasso;

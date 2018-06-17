@@ -46,6 +46,9 @@ public interface NewDAO {
     @Query("SELECT * FROM  new WHERE game = :games ORDER BY created_date DESC")
     LiveData<List<New>> getAllNewsByGame(String games);
 
+    @Query("SELECT coverImage FROM  new WHERE game = :games")
+    LiveData<String> getAllImagesByGame(String games);
+
 
 
 
